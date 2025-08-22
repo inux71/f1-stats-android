@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">F1 Stats</string>
+    <string name="standings">Standings</string>
+    <string name="races">Races</string>
+    <string name="settings">Settings</string>
+    <string name="go_back">Go back</string>
 </resources>
