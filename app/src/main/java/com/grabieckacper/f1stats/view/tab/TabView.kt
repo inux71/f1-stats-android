@@ -11,10 +11,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -57,6 +60,10 @@ fun TabView(
             icon = Icons.Default.SportsScore
         )
     )
+
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
 
     val navHostController = rememberNavController()
     val currentNavBackStackEntry by navHostController.currentBackStackEntryAsState()
@@ -105,6 +112,9 @@ fun TabView(
                     )
                 }
             }
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
         }
     ) { paddingValues ->
         NavHost(
@@ -114,6 +124,7 @@ fun TabView(
         ) {
             composable<Standings> {
                 StandingsView(
+                    snackbarHostState = snackbarHostState,
                     onNavigateToDriverView = onNavigateToDriverView,
                     onNavigateToTeamView = onNavigateToTeamView
                 )
