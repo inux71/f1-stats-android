@@ -1,4 +1,4 @@
-package com.grabieckacper.f1stats.view.tab.standings.component
+package com.grabieckacper.f1stats.view.tab.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun StandingsCard(
+fun ItemCard(
     leadingText: String? = null,
     title: String,
     subtitle: String? = null,

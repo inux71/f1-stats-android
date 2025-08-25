@@ -5,4 +5,6 @@ object Url {
 
     const val CONSTRUCTOR_STANDINGS = "current/constructors-championship"
     const val DRIVER_STANDINGS = "current/drivers-championship"
+
+    const val RACES = "current"
 }

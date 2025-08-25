@@ -131,7 +131,10 @@ fun TabView(
             }
 
             composable<Races> {
-                RacesView(onNavigateToCircuitView = onNavigateToCircuitView)
+                RacesView(
+                    snackbarHostState = snackbarHostState,
+                    onNavigateToCircuitView = onNavigateToCircuitView
+                )
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.grabieckacper.f1stats.service
 
+import com.grabieckacper.f1stats.service.impl.RaceServiceImpl
 import com.grabieckacper.f1stats.service.impl.StandingsServiceImpl
 import dagger.Module
 import dagger.Provides
@@ -15,5 +16,11 @@ object ServiceModule {
     @Singleton
     fun provideStandingsService(httpClient: HttpClient): StandingsService {
         return StandingsServiceImpl(httpClient = httpClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRaceService(httpClient: HttpClient): RaceService {
+        return RaceServiceImpl(httpClient = httpClient)
     }
 }
