@@ -1,10 +1,15 @@
 package com.grabieckacper.f1stats.network
 
-object Url {
-    const val BASE = "https://f1api.dev/api/"
+sealed class Url(val path: String) {
+    class Circuit(id: String) : Url(path = "circuits/$id")
+    class Driver(id: String) : Url(path = "drivers/$id")
+    class Team(id: String) : Url(path = "teams/$id")
 
-    const val CONSTRUCTOR_STANDINGS = "current/constructors-championship"
-    const val DRIVER_STANDINGS = "current/drivers-championship"
+    object ConstructorStandings : Url(path = "current/constructors-championship")
+    object DriverStandings : Url(path = "current/drivers-championship")
+    object Races : Url(path = "current")
 
-    const val RACES = "current"
+    companion object {
+        const val BASE = "https://f1api.dev/api/"
+    }
 }

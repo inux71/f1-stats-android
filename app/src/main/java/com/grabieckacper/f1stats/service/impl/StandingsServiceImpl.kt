@@ -15,14 +15,15 @@ class StandingsServiceImpl @Inject constructor(
     private val httpClient: HttpClient
 ) : StandingsService {
     override suspend fun getConstructors(): List<ConstructorChampionship> {
-        val response: ConstructorStandings = httpClient.get(urlString = Url.CONSTRUCTOR_STANDINGS)
+        val response: ConstructorStandings = httpClient
+            .get(urlString = Url.ConstructorStandings.path)
             .body()
 
         return response.constructorsChampionship
     }
 
     override suspend fun getDrivers(): List<DriverChampionship> {
-        val response: DriverStandings = httpClient.get(urlString = Url.DRIVER_STANDINGS).body()
+        val response: DriverStandings = httpClient.get(urlString = Url.DriverStandings.path).body()
 
         return response.driversChampionship
     }

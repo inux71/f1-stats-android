@@ -44,9 +44,9 @@ object Tab
 @OptIn(ExperimentalMaterial3Api::class)
 fun TabView(
     onNavigateToSettingsView: () -> Unit,
-    onNavigateToDriverView: () -> Unit,
-    onNavigateToTeamView: () -> Unit,
-    onNavigateToCircuitView: () -> Unit
+    onNavigateToDriverView: (id: String) -> Unit,
+    onNavigateToTeamView: (id: String) -> Unit,
+    onNavigateToCircuitView: (id: String) -> Unit
     ) {
     val tabRoutes = listOf(
         TabRoute(

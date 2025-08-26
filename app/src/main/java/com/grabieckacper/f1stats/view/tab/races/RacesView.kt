@@ -1,5 +1,6 @@
 package com.grabieckacper.f1stats.view.tab.races
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +23,7 @@ object Races
 fun RacesView(
     viewModel: RacesViewModel = hiltViewModel(),
     snackbarHostState: SnackbarHostState,
-    onNavigateToCircuitView: () -> Unit
+    onNavigateToCircuitView: (id: String) -> Unit
 ) {
     val state: RacesViewModel.RacesViewModelState = viewModel.state.value
 
@@ -43,6 +44,9 @@ fun RacesView(
         ) {
             items(items = state.races) { race ->
                 ItemCard(
+                    modifier = Modifier.clickable {
+                        onNavigateToCircuitView(race.circuit.circuitId)
+                    },
                     leadingText = "#${race.round}",
                     title = race.raceName,
                     subtitle = "${race.circuit.city} ${race.circuit.country}"

@@ -1,22 +1,16 @@
 package com.grabieckacper.f1stats.view.tab.standings
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.PrimaryTabRow
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
@@ -24,11 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.grabieckacper.f1stats.R
-import com.grabieckacper.f1stats.view.tab.standings.component.StandingsCard
+import com.grabieckacper.f1stats.view.tab.component.ItemCard
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -39,8 +30,8 @@ object Standings
 fun StandingsView(
     viewModel: StandingsViewModel = hiltViewModel(),
     snackbarHostState: SnackbarHostState,
-    onNavigateToDriverView: () -> Unit,
-    onNavigateToTeamView: () -> Unit
+    onNavigateToDriverView: (id: String) -> Unit,
+    onNavigateToTeamView: (id: String) -> Unit
 ) {
     val state: StandingsViewModel.StandingsViewModelState = viewModel.state.value
 
@@ -137,7 +128,10 @@ fun StandingsView(
                 when (state.selectedChampionship) {
                     Championship.DRIVER -> {
                         items(items = state.driversChampionship) { driverChampionship ->
-                            StandingsCard(
+                            ItemCard(
+                                modifier = Modifier.clickable {
+                                    onNavigateToDriverView(driverChampionship.driverId)
+                                },
                                 leadingText = "#${driverChampionship.position}",
                                 title = "${driverChampionship.driver.name} ${driverChampionship.driver.surname}",
                                 subtitle = driverChampionship.team.teamName,
@@ -148,7 +142,10 @@ fun StandingsView(
 
                     Championship.CONSTRUCTOR -> {
                         items(items = state.constructorsChampionship) { constructorChampionship ->
-                            StandingsCard(
+                            ItemCard(
+                                modifier = Modifier.clickable {
+                                    onNavigateToTeamView(constructorChampionship.teamId)
+                                },
                                 leadingText = "#${constructorChampionship.position}",
                                 title = constructorChampionship.team.teamName,
                                 subtitle = constructorChampionship.team.country,

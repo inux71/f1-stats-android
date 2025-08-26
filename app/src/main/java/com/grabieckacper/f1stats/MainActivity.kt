@@ -44,13 +44,13 @@ class MainActivity : ComponentActivity() {
                                     navHostController.navigate(route = Settings)
                                 },
                                 onNavigateToDriverView = {
-                                    navHostController.navigate(route = Driver)
+                                    navHostController.navigate(route = Driver(id = it))
                                 },
                                 onNavigateToTeamView = {
-                                    navHostController.navigate(route = Team)
+                                    navHostController.navigate(route = Team(id = it))
                                 },
                                 onNavigateToCircuitView = {
-                                    navHostController.navigate(route = Circuit)
+                                    navHostController.navigate(route = Circuit(id = it))
                                 }
                             )
                         }

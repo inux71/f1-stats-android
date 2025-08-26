@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class RaceServiceImpl @Inject constructor(private val httpClient: HttpClient): RaceService {
     override suspend fun getRaces(): List<Race> {
-        val response: RacesResponse = httpClient.get(urlString = Url.RACES).body()
+        val response: RacesResponse = httpClient.get(urlString = Url.Races.path).body()
 
         return response.races
     }

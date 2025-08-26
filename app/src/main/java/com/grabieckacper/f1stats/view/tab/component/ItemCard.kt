@@ -16,12 +16,13 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ItemCard(
+    modifier: Modifier = Modifier,
     leadingText: String? = null,
     title: String,
     subtitle: String? = null,
     trailingText: String? = null
 ) {
-    ElevatedCard(modifier = Modifier.padding(
+    ElevatedCard(modifier = modifier.padding(
         horizontal = 8.dp,
         vertical = 4.dp
     )) {
