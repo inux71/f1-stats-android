@@ -1,6 +1,5 @@
 package com.grabieckacper.f1stats.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -8,6 +7,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -33,18 +33,23 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun F1StatsTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    viewModel: ThemeViewModel = hiltViewModel(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    val state: ThemeViewModel.ThemeViewModelState = viewModel.state.value
+
     val colorScheme = when {
-        dynamicColor -> {
+        state.dynamicColor -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            if (state.darkTheme) {
+                dynamicDarkColorScheme(context)
+            } else {
+                dynamicLightColorScheme(context)
+            }
         }
 
-        darkTheme -> DarkColorScheme
+        state.darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
 
